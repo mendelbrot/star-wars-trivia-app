@@ -1,46 +1,80 @@
 import axios from 'axios';
 import _ from 'lodash';
-import { ID, Film } from 'types/StarWarsItems';
+import { ID, StarWarsItem, StarWarsItemType } from 'types/StarWarsTypes';
+import StarWarsViewModel from 'models/StarWarsViewModel';
+import { GetListReturnType } from 'types/SWAPITypes';
 
-export const SWAPI_BASE_URL = 'https://swapi.dev/api/';
+const SWAPI_BASE_URL = 'https://swapi.dev/api/';
 
-export async function GetFilmsListAsync(): Promise<Film[]> {
-  const response = await axios.get(SWAPI_BASE_URL + 'films');
-  
-  const baseUrlCharsToRemove = SWAPI_BASE_URL.length;
-  const filmsList = response.data.results.map((item: any) => {
-    const {
-      url,
-      episode_id,
-      title,
-      opening_crawl,
-      director,
-      producer,
-      release_date,
-      characters,
-      planets,
-      starships,
-      vehicles,
-      species,
-    } = item;
-    
-    return {
-      id: url.substring(baseUrlCharsToRemove - 1),
-      type: 'Film',
-      episodeId: episode_id,
-      title: title,
-      openingCrawl: opening_crawl,
-      director: director,
-      producer: producer,
-      releaseDate: release_date,
-      characters: characters.map((item: string) => item.substring(baseUrlCharsToRemove - 1)),
-      planets: planets.map((item: string) => item.substring(baseUrlCharsToRemove - 1)),
-      starships: starships.map((item: string) => item.substring(baseUrlCharsToRemove - 1)),
-      vehicles: vehicles.map((item: string) => item.substring(baseUrlCharsToRemove - 1)),
-      species: species.map((item: string) => item.substring(baseUrlCharsToRemove - 1)),
-    }
+// for results that link to another item, the base url gets stripped off
+const baseUrlCharsToRemove = SWAPI_BASE_URL.length;
+
+// to get the path to put into the api request from the item type
+const apiPathsFromTypes = {
+  Film: 'films/',
+  Person: 'people/',
+  Planet: 'planets/',
+  Starship: 'starships/',
+  Vehicle: 'vehicles/',
+  Species: 'species/',
+}
+
+function processApiDataItem(item: any, itemType: StarWarsItemType): StarWarsItem {
+  const {
+    url,
+  } = item;
+
+  const returnItem = {
+    id: url.substring(baseUrlCharsToRemove - 1) as ID,
+    type: itemType,
+  };
+
+  const {
+    detailsAttributes,
+    detailsReferenceSingle,
+    detailsReferenceList
+  } = StarWarsViewModel[itemType];
+
+  detailsAttributes.forEach(({ key }) => {
+    returnItem[key as keyof typeof returnItem] = item[key];
+  });
+  detailsReferenceSingle.forEach(({ key }) => {
+    returnItem[key as keyof typeof returnItem] =
+      item[key].substring(baseUrlCharsToRemove - 1);
+  });
+  detailsReferenceList.forEach(({ key }) => {
+    returnItem[key as keyof typeof returnItem] = item[key].map(() => {
+      return item[key].substring(baseUrlCharsToRemove - 1);
+    });
   });
 
-  return filmsList;
+  return returnItem as StarWarsItem;
+}
 
+export async function getListAsync(itemType: StarWarsItemType, pageQuery?: number): Promise<GetListReturnType> {
+  const path = apiPathsFromTypes[itemType as keyof typeof apiPathsFromTypes];
+  let request = SWAPI_BASE_URL + path;
+  if (pageQuery) {
+    request += '?page=' + pageQuery;
+  };
+  const response = await axios.get(request);
+
+  const { count, next, previous, results } = response.data;
+
+  let page = null;
+
+  // infer the page from previous and next
+  if (next) {
+    page = parseInt(next.split('=')[-1]) - 1;
+  } else if (previous) {
+    page = parseInt(previous.split('=')[-1]) + 1;
+  };
+  
+  const itemsList = results.map((item: any) => processApiDataItem(item, itemType));
+  
+  return {
+    count,
+    page,
+    results: itemsList
+  };
 };

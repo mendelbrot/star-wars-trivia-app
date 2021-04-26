@@ -1,17 +1,23 @@
 ## TODO
 
-- [ ] render list of movies from api data
-- [ ] render details view of a movie
-- [ ] render details views of characters, planets, etc...
-- [ ] implement front end search on the movies list
+- [ ] clean up star wars types
+- [ ] implement front end search on the movies list OR use the API's search
 
 ## IN PROGRESS
 
 - [ ] service to consume api data
+- [ ] service function that returns items of given type
+- [ ] service function that returns single item
+- [ ] render list of movies from api data
+- [ ] render details view of a movie
+- [ ] render details views of characters, planets, etc...
 
 ## ON HOLD
 
 - [ ] implement unit testing
+- [ ] implement end-to-end testing, mocking axios
+- [ ] caching api data
+- [ ] generalize movies list to list any star wars data
 
 ## DONE
 

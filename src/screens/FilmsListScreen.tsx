@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from 'navigation/RootNavigation';
-import { GetFilmsListAsync } from 'services/SWAPI';
-import { Film } from 'types/StarWarsItems';
+import { getListAsync } from 'services/SWAPI';
+import { Film } from 'types/StarWarsTypes';
 import List from 'components/List';
 import Loading from 'components/Loading';
 import Error from 'components/Error';
+import { GetListReturnType } from 'types/SWAPITypes';
 
 type FilmsListScreenRouteProp = RouteProp<
   RootStackParamList,
@@ -24,7 +25,7 @@ type Props = {
 };
 
 type State = {
-  data: Film[] | null,
+  data: GetListReturnType | null,
   error: any | null,
 };
 
@@ -40,15 +41,11 @@ class FilmsList extends Component<Props, State> {
 
   async componentDidMount() {
     try {
-      const data = await GetFilmsListAsync();
+      const data = await getListAsync('Film');
 
-      this.setState({
-        data,
-      });
+      this.setState({data});
     } catch (error) {
-      this.setState({
-        error,
-      });
+      this.setState({error});
     }
   };
   
@@ -60,7 +57,8 @@ class FilmsList extends Component<Props, State> {
     };
 
     if (data) {
-      return <List data={data} />;
+      const { results } = data
+      return <List data={results} />;
     };
 
     return <Loading />;
