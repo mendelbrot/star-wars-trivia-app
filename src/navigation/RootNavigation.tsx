@@ -2,12 +2,13 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import MoviesListScreen from 'screens/MoviesListScreen';
-import MovieDetailsScreen from '../screens/MovieDetailsScreen';
+import FilmsListScreen from 'screens/FilmsListScreen';
+import DetailsScreen from '../screens/DetailsScreen';
+import { StarWarsItem } from 'types/StarWarsItems';
 
 export type RootStackParamList = {
-  MoviesListScreen: undefined;
-  MovieDetailsScreen: { name: string };
+  FilmsListScreen: undefined;
+  DetailsScreen: { item: StarWarsItem };
 };
 
 export const RootStack = createStackNavigator<RootStackParamList>();
@@ -17,14 +18,14 @@ function RootNavigation() {
     <NavigationContainer>
       <RootStack.Navigator>
         <RootStack.Screen
-          name="MoviesListScreen"
-          component={MoviesListScreen}
-          options={{ title: 'Movies' }}
+          name="FilmsListScreen"
+          component={FilmsListScreen}
+          options={{ title: 'Films' }}
         />
         <RootStack.Screen
-          name="MovieDetailsScreen"
-          component={MovieDetailsScreen}
-          options={{ title: 'Movie Details' }}
+          name="DetailsScreen"
+          component={DetailsScreen}
+          options={{ title: 'Details' }}
         />
       </RootStack.Navigator>
     </NavigationContainer>

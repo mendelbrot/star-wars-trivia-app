@@ -59,3 +59,19 @@ Reflecting on this, it might be better to do the test by placing the component i
 
 I wanted to get some tests working, but considering the deadline I'm going to leave this aside and continue development without testing.
 
+## 2021-04-25
+
+### tutorial on fetching data with React
+
+https://www.robinwieruch.de/react-fetching-data
+https://www.robinwieruch.de/react-hooks-fetch-data
+
+### for vscode intellisense, difficulty setting an alias for a file in tsconfig (alias works for a folder but not for a file)
+
+https://stackoverflow.com/questions/58930156/vs-code-jsconfig-advance-alias-glob-paths
+
+
+### lodash with typescript
+
+https://www.npmjs.com/package/@types/lodash
+

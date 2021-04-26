@@ -1,21 +1,22 @@
 import React from 'react';
 import { Button, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { StarWarsItemMeta, StarWarsItem } from 'types/StarWarsItems';
 
 type Props = {
-  title: string;
+  item: StarWarsItem;
 };
 
-function ListItem({ title }: Props) {
-  // const navigation = useNavigation();
+function ListItem({ item }: Props) {
+  const navigation = useNavigation();
+
+  const titleAttribute = StarWarsItemMeta[item.type]['listTitleAttribute'] as keyof StarWarsItem;
 
   return (
     <View>
       <Button
-        title={title}
-        onPress={() => null
-          // navigation.navigate('MovieDetailsScreen', { name: title })
-        }
+        title={item[titleAttribute]}
+        onPress={() => navigation.navigate('DetailsScreen', { item })}
       />
     </View>
   );

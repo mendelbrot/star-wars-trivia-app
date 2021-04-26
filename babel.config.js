@@ -9,13 +9,11 @@ module.exports = function (api) {
           alias: {
             assets: './assets',
             components: './src/components',
-            constants: './src/constants',
             lib: './src/lib',
             navigation: './src/navigation',
             screens: './src/screens',
             services: './src/services',
             types: './src/types',
-            mocks: './src/tests/mocks',
           },
         },
       ]
