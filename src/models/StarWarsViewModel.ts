@@ -1,5 +1,4 @@
 import { StarWarsViewModelType } from 'types/StarWarsModelTypes';
-import { StarWarsItem } from 'types/StarWarsTypes';
 
 // This model is used by the views to determine how to display the data.
 

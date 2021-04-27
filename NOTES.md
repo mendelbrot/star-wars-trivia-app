@@ -77,3 +77,51 @@ https://www.npmjs.com/package/@types/lodash
 
 ## 2021-04-26
 
+### reorganizing the models and types
+
+I now have three files in the types folder.
+
+#### StarWarsTypes
+
+StarWarsTypes specifies the types for the star wars items.  
+* StarWarsItem is the data type for any of the star wars items returned by the SWAPI service functions.
+* StarWarsItemType is the type of a star wars item.  It can be Film, Person, etc...
+* ID is the id of a star wars item.  This is taken from the url field returned by the api, I strip off the base url and leave the parts specifying the type of star wars item and the number.  i.e. 'films/1/', 'people/2/' etc...
+
+So far I have found that in the app, the typescript doesn't always catch on to the the type I intend and I get code highlight error messages.  This is especially true when accessing an attribute of and object.  When I'm not able to do the typing properly in a certain area, I can make the typescript assume the type I intend by `item[key as IntendedType]` or if I have to `item[key as typeof keyof item]`.  Seeing this in the code can be a reminder of the intended type, and also indicates an area that can be improved with more knowledge of typing.
+
+One of the reasons the typescript has been a bit more difficult is because I made the details view general, for displaying any of the six star wars types, but because of this, typing in a way that encompasses all of those types is more complicated. 
+
+I wrote out all six of the star wars item types, and I find that there can be redundant work, as they are described as types, and again in the view model (discussed later), and if there is client side validation they would be described again as schemas.  Of course all three descriptions are somewhat different, nevertheless, making a change to the data requires editing two (or three) different files.
+
+#### StarWarsModelTypes
+
+The star wars model discussed in the section after next has it's own typpes, this is where they are kept.
+
+#### SWAPITyes
+
+I had to make a type for the return type of getListAsync in the SWAPI service.  Since this needed to be accessed there and in the component it was called in, I made a seperate types file for it.
+
+#### StarWarsViewModel
+
+Because the details view is multi-purpose for displaying any of the star wars types, to support it I made an object that specified the data to display, labels, etc... for each of the types.
+
+I used the name view model which is reminiscent of the .net view model, although it's not completely analogous.
+
+This model is also used in the SWAPI service.  the data fetching functions use it as a guide for how to process the api data into the data that they return.  
+
+I created a models folder to store these files in.  Currently the app doesn't build. For some reason it's not recognizing the alias for the models folder in the babel.config.js file.
+
+## 2021-04-27
+
+Today the plan is to simplify the service functions.  The API returns full url's for references to other items and other pages.  I have been pulling out just the 'films/1/' part of the url and calling it the id, and for pagination it returns the full url and next, and I was pulling out the page number from the '/?page=1" part.  Now I think this is overly complicated for this project and I'm going to switch to returning the url's etc unchanged.  For following a link I'll make a function that takes a url.  I'll make these functions:
+
+* getListAync
+* getListByUrlAsync
+* getItemByUrlAync
+
+Making this change will also require changing the star wars types, and when I do this I'll also remove most of the detail from these types, as the detail hasn't been helpful for the way the star wars are used in multi-purpose components.
+
+### getting the models alias working
+
+I reinstalled node modules.  ran `npm start --reset-cache`.  ran `rm -rf /tmp/metro-*`.  After this nom one a different error message appeared when building. That was an actual in the error in the code, and after fixing that it built. 

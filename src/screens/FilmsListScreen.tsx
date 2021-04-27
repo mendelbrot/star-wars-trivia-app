@@ -42,7 +42,6 @@ class FilmsList extends Component<Props, State> {
   async componentDidMount() {
     try {
       const data = await getListAsync('Film');
-
       this.setState({data});
     } catch (error) {
       this.setState({error});
@@ -57,7 +56,7 @@ class FilmsList extends Component<Props, State> {
     };
 
     if (data) {
-      const { results } = data
+      const { results } = data;
       return <List data={results} />;
     };
 

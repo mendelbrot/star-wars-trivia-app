@@ -1,4 +1,4 @@
-import { StarWarsItemType, StarWarsItem } from 'types/StarWarsTypes';
+import { StarWarsType } from 'types/StarWarsTypes';
 
 // Types relating to the model in models/StarWarsViewModel.ts which is used for
 // specifying data to display
@@ -11,7 +11,7 @@ export type DetailsAttributeType = {
 export type DetailsReferenceAttributeType = {
   key: string,
   label: string,
-  type: StarWarsItemType
+  type: StarWarsType
 }
 
 export type ModelAttributeType = {
@@ -22,5 +22,5 @@ export type ModelAttributeType = {
 }
 
 export type StarWarsViewModelType = {
-  [key in StarWarsItemType]: ModelAttributeType
+  [key in StarWarsType]: ModelAttributeType
 };

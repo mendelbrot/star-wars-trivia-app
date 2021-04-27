@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { StarWarsItemMeta, StarWarsItem } from 'types/StarWarsItems';
+import { StarWarsItem } from 'types/StarWarsTypes';
+import StarWarsViewModel from 'models/StarWarsViewModel';
 
 type Props = {
   item: StarWarsItem;
@@ -10,7 +11,7 @@ type Props = {
 function ListItem({ item }: Props) {
   const navigation = useNavigation();
 
-  const titleAttribute = StarWarsItemMeta[item.type]['listTitleAttribute'] as keyof StarWarsItem;
+  const titleAttribute = StarWarsViewModel[item.type]['listTitleAttribute'] as keyof StarWarsItem;
 
   return (
     <View>

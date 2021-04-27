@@ -1,7 +1,8 @@
-import { StarWarsItemType, StarWarsItem } from 'types/StarWarsTypes';
+import { StarWarsItem, URL } from 'types/StarWarsTypes';
 
 export type GetListReturnType = {
   count: number,
-  page: number | null,
+  next: URL | null
+  previous: URL | null,
   results: StarWarsItem[]
 };
