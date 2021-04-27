@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import ListNavItem from 'components/ListNavItem';
+import NavItem from 'components/NavItem';
 import { StarWarsItem } from 'types/StarWarsTypes';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 
 function renderItem({ item }: { item: StarWarsItem }) {
   return (
-    <ListNavItem
+    <NavItem
       item={item}
     />
   )

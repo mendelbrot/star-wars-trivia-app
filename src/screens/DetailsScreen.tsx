@@ -6,7 +6,7 @@ import { RootStackParamList } from '../navigation/RootNavigation';
 import { URL, StarWarsItem, StarWarsType } from 'types/StarWarsTypes';
 import { DetailsReferenceAttributeType } from 'types/StarWarsModelTypes';
 import StarWarsViewModel from 'models/StarWarsViewModel';
-// import DetailsReferenceList from 'components/DetailsReferenceList';
+import NavFromUrl from 'components/NavFromUrl';
 
 type DetailsScreenRouteProp = RouteProp<
   RootStackParamList,
@@ -42,16 +42,20 @@ function DetailsScreen({ navigation, route }: Props) {
           </View>
         );
       })}
-      {/* {detailsReferenceList.map(itemMeta => {
-        const itemIds = item[itemMeta.key as keyof StarWarsItem] as unknown as ID[];
+      {detailsReferenceList.map(model => {
+        const { key, label, type } = model;
+        const urls = item[key as keyof StarWarsItem] as URL[];
         return (
-          <DetailsReferenceList
-            key={itemMeta.key}
-            itemMeta={itemMeta as DetailsReferenceAttributeType}
-            itemIds={itemIds}
-          />
+          <View key={key}>
+            <Text style={{ fontWeight: 'bold' }}>{label}</Text>
+            {urls.map(url => {
+              return (
+                <NavFromUrl key={url} type={type} url={url} />
+              );
+            })}
+          </View>
         );
-      })} */}
+      })}
     </ScrollView>
   );
 };

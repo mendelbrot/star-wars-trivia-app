@@ -1,26 +1,31 @@
 ## TODO
 
-- [ ] clean up star wars types
-- [ ] implement front end search on the movies list OR use the API's search
+- [ ] front end search on the movies list OR use the API's search
 
 ## IN PROGRESS
 
-- [ ] service to consume api data
-- [ ] service function that returns items of given type
-- [ ] service function that returns single item
-- [ ] render list of movies from api data
-- [ ] render details view of a movie
-- [ ] render details views of characters, planets, etc...
+- [ ] improve nav title functions
+- [ ] pagination with flat list
+- [ ] minimal styling
 
 ## ON HOLD
 
-- [ ] implement unit testing
-- [ ] implement end-to-end testing, mocking axios
+- [ ] unit testing
+- [ ] end-to-end testing, mocking axios
 - [ ] caching api data
-- [ ] generalize movies list to list any star wars data
+- [ ] error boundaries around list and details screen
 
 ## DONE
 
 - [x] create starter app and test on phone
 - [x] organize repo and customize import aliasing
 - [x] put in navigation
+- [x] clean up star wars types
+- [x] service to consume api data
+- [x] service function that returns items of given type
+- [x] service function that returns single item
+- [x] render list of movies from api data
+- [x] render details view of a movie
+- [x] render details views of characters, planets, etc...
+- [x] generalize movies list to list of any star wars data
+- [x] links between details views

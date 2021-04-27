@@ -140,3 +140,9 @@ ListScreen will receive the star wars type from navigation and display the list 
 
 DetailsScreen receives the item from nave and displays the data and links to other details screens.
 
+Update: These screens now work.  The next task is to display the list of items the details screen links to.
+
+Update: Tried to create a higher order component for fetching data for a single item.  This lead to mucking around with typescript for the react types.  Due to time, I decided to not use a hoc.
+
+Update: linking between the details screens now works.
+
