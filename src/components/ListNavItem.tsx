@@ -8,7 +8,7 @@ type Props = {
   item: StarWarsItem;
 };
 
-function ListItem({ item }: Props) {
+function ListNavItem({ item }: Props) {
   const navigation = useNavigation();
 
   const titleAttribute = StarWarsViewModel[item.type]['listTitleAttribute'] as keyof StarWarsItem;
@@ -16,11 +16,11 @@ function ListItem({ item }: Props) {
   return (
     <View>
       <Button
-        title={item[titleAttribute]}
+        title={item[titleAttribute] as string}
         onPress={() => navigation.navigate('DetailsScreen', { item })}
       />
     </View>
   );
 };
 
-export default ListItem;
+export default ListNavItem;

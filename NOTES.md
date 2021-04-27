@@ -125,3 +125,18 @@ Making this change will also require changing the star wars types, and when I do
 ### getting the models alias working
 
 I reinstalled node modules.  ran `npm start --reset-cache`.  ran `rm -rf /tmp/metro-*`.  After this nom one a different error message appeared when building. That was an actual in the error in the code, and after fixing that it built. 
+
+### the screens
+
+there are three screens:
+
+* HomeScreen
+* ListScreen
+* DetailsScreen
+
+HomeScreen will have six buttons, one for each type of list
+
+ListScreen will receive the star wars type from navigation and display the list for that type.  
+
+DetailsScreen receives the item from nave and displays the data and links to other details screens.
+

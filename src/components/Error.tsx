@@ -5,7 +5,7 @@ function Error() {
 
   return (
     <View>
-      <Text>Loading...</Text>
+      <Text>Error</Text>
     </View>
   );
 };

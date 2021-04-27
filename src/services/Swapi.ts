@@ -2,7 +2,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import { URL, StarWarsItem, StarWarsType } from 'types/StarWarsTypes';
 import StarWarsViewModel from 'models/StarWarsViewModel';
-import { GetListReturnType } from 'types/SWAPITypes';
+import { GetListReturnType } from 'types/SwapiTypes';
 
 const SWAPI_BASE_URL = 'https://swapi.dev/api/';
 

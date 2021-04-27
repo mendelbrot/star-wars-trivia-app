@@ -3,10 +3,10 @@ import { Text, View, ScrollView } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/RootNavigation';
-import { ID, StarWarsItem, StarWarsItemType } from 'types/StarWarsTypes';
+import { URL, StarWarsItem, StarWarsType } from 'types/StarWarsTypes';
 import { DetailsReferenceAttributeType } from 'types/StarWarsModelTypes';
 import StarWarsViewModel from 'models/StarWarsViewModel';
-import DetailsReferenceList from 'components/DetailsReferenceList';
+// import DetailsReferenceList from 'components/DetailsReferenceList';
 
 type DetailsScreenRouteProp = RouteProp<
   RootStackParamList,
@@ -28,21 +28,21 @@ function DetailsScreen({ navigation, route }: Props) {
   const {
     detailsAttributes,
     detailsReferenceList
-  } = StarWarsViewModel[item.type as StarWarsItemType];
+  } = StarWarsViewModel[item.type as StarWarsType];
 
   return (
     <ScrollView>
-      {detailsAttributes.map(itemMeta => {
-        const itemLabel = itemMeta.label;
-        const itemText = item[itemMeta.key as keyof StarWarsItem];
+      {detailsAttributes.map(model => {
+        const { key, label } = model;
+        const itemText = item[key as keyof StarWarsItem] as string;
         return (
-          <View key={itemMeta.key}>
-            <Text>{itemLabel}</Text>
+          <View key={model.key}>
+            <Text style={{ fontWeight: 'bold' }}>{label}</Text>
             <Text>{itemText}</Text>
           </View>
         );
       })}
-      {detailsReferenceList.map(itemMeta => {
+      {/* {detailsReferenceList.map(itemMeta => {
         const itemIds = item[itemMeta.key as keyof StarWarsItem] as unknown as ID[];
         return (
           <DetailsReferenceList
@@ -51,7 +51,7 @@ function DetailsScreen({ navigation, route }: Props) {
             itemIds={itemIds}
           />
         );
-      })}
+      })} */}
     </ScrollView>
   );
 };

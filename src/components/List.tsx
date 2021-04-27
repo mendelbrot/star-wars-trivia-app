@@ -1,27 +1,27 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import ListItem from 'components/ListItem';
+import ListNavItem from 'components/ListNavItem';
+import { StarWarsItem } from 'types/StarWarsTypes';
 
 type Props = {
-  data: any[];
+  items: StarWarsItem[],
+  key: string,
 };
 
-
-function renderItem({ item }: { item: any }) {
+function renderItem({ item }: { item: StarWarsItem }) {
   return (
-    <ListItem
+    <ListNavItem
       item={item}
-      key={item.id}
     />
   )
 }
 
-function List({ data }: Props) {
-
+function List({ items, key }: Props) {
   return (
     <FlatList
-      data={data}
+      data={items}
       renderItem={renderItem}
+      keyExtractor={item => item[key] as string}
     />
   );
 };
