@@ -154,5 +154,5 @@ Flat list search tutorial:
 
 https://blog.crowdbotics.com/add-search-bar-flatlist-react-native-apps/
 
-
+Update: I finished search and styling.  For loading the list, or loading after search, the the loading screen flashes on and of.  This is distracting.  It would be better to show a spinner  before the results change instead of the loading screen.  (And with the spinner, inputs would need to be disabled while loading).
 

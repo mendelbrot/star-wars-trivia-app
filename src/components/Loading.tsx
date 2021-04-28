@@ -1,13 +1,24 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 
 function Loading() {
 
   return (
-    <View>
-      <Text>Loading...</Text>
+    <View style={styles.view}>
+      <Text style={styles.text} >{'Loading...'}</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  view: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  text: {
+    fontSize: 20,
+  }
+});
 
 export default Loading;

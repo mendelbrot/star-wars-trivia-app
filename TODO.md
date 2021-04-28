@@ -3,7 +3,7 @@
 
 ## IN PROGRESS
 
-- [ ] minimal styling
+- [ ] create a components tree diagram
 
 ## ON HOLD
 
@@ -11,6 +11,7 @@
 - [ ] end-to-end testing, mocking axios
 - [ ] caching api data
 - [ ] error boundaries around list and details screen
+- [ ] replace loading screen with a spinner
 
 ## DONE
 
@@ -29,3 +30,4 @@
 - [x] improve nav title functions
 - [x] pagination with flat list
 - [x] front end search on the movies list OR use the API's search
+- [x] minimal styling

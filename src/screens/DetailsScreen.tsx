@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/RootNavigation';
@@ -37,8 +37,8 @@ function DetailsScreen({ navigation, route }: Props) {
         const attributeText = item[key as keyof StarWarsItem] as string;
         return (
           <View key={model.key}>
-            <Text style={{ fontWeight: 'bold' }}>{label}</Text>
-            <Text>{attributeText}</Text>
+            <Text style={styles.title}>{label}</Text>
+            <Text style={styles.text}>{attributeText}</Text>
           </View>
         );
       })}
@@ -47,7 +47,7 @@ function DetailsScreen({ navigation, route }: Props) {
         const url = item[key as keyof StarWarsItem] as URL;
         return (
           <View key={model.key}>
-            <Text style={{ fontWeight: 'bold' }}>{label}</Text>
+            <Text style={styles.title}>{label}</Text>
             <NavFromUrl key={url} type={type} url={url} />
           </View>
         );
@@ -57,7 +57,7 @@ function DetailsScreen({ navigation, route }: Props) {
         const urls = item[key as keyof StarWarsItem] as URL[];
         return (
           <View key={key}>
-            <Text style={{ fontWeight: 'bold' }}>{label}</Text>
+            <Text style={styles.title}>{label}</Text>
             {urls.map(url => {
               return (
                 <NavFromUrl key={url} type={type} url={url} />
@@ -69,5 +69,19 @@ function DetailsScreen({ navigation, route }: Props) {
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginTop: 20,
+    marginBottom: 5,
+    marginHorizontal: 15,
+  },
+  text: {
+    fontSize: 20,
+    marginHorizontal: 15,
+  }
+});
 
 export default DetailsScreen;

@@ -28,11 +28,37 @@ type Props = {
 type State = {
   data: GetListReturnType | null,
   error: any | null,
+  searchQuery: string
 };
 
 class ListScreen extends Component<Props, State> {
   type: StarWarsType;
   title: string;
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      data: null,
+      error: null,
+      searchQuery: ''
+    };
+
+    this.type = this.props.route.params.type;
+    this.title = StarWarsViewModel[this.type].pluralLabel;
+
+    this.getMoreItems = this.getMoreItems.bind(this);
+    this.setSearchQuery = this.setSearchQuery.bind(this);
+  };
+
+  async componentDidMount() {
+    try {
+      const data = await getListAsync(this.type);
+      this.setState({ data });
+    } catch (error) {
+      this.setState({error});
+    };
+  };
 
   async getMoreItems() {
     try {
@@ -52,41 +78,18 @@ class ListScreen extends Component<Props, State> {
     };
   };
 
-  async search(searchQuery: string) {
+  async setSearchQuery(searchQuery: string) {
     try {
+      this.setState({ data: null, error: null });
       const data = await getListAsync(this.type, searchQuery);
-      this.setState({ data });
+      this.setState({ data, searchQuery });
     } catch (error) {
       this.setState({ error });
     };
   };
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      data: null,
-      error: null,
-    };
-
-    this.type = this.props.route.params.type;
-    this.title = StarWarsViewModel[this.type].pluralLabel;
-
-    this.getMoreItems = this.getMoreItems.bind(this);
-    this.search = this.search.bind(this);
-  };
-
-  async componentDidMount() {
-    try {
-      const data = await getListAsync(this.type);
-      this.setState({ data });
-    } catch (error) {
-      this.setState({error});
-    };
-  };
   
   render() {
-    const { data, error } = this.state;
+    const { data, error, searchQuery } = this.state;
 
     if (error) {
       return <Error />;
@@ -99,7 +102,8 @@ class ListScreen extends Component<Props, State> {
           keyAttribute='url'
           items={results}
           getMoreItems={this.getMoreItems}
-          search={this.search}
+          setSearchQuery={this.setSearchQuery}
+          searchQuery={searchQuery}
         />
       );
     };

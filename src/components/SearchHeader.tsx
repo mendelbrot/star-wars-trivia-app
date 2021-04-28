@@ -1,33 +1,56 @@
 import React, { useState } from 'react';
-import { TextInput, Button, View } from 'react-native';
+import { StyleSheet, TextInput, Button, View } from 'react-native';
 
 type Props = {
-  search: Function,
+  setSearchQuery: Function,
+  initialSearchQuery: string
 };
 
-function SearchHeader({ search }: Props) {
-  const [searchQuery, setSearchQuery] = useState('');
+function SearchHeader({ initialSearchQuery, setSearchQuery }: Props) {
+  const [input, setInput] = useState(initialSearchQuery);
 
   return (
-    <View>
+    <View style={styles.view}>
       <TextInput
-        onChangeText={setSearchQuery}
-        value={searchQuery}
+        style={styles.input}
+        onChangeText={setInput}
+        value={input}
         placeholder='Search'
       />
+      <View style={styles.spacing} />
       <Button
-        title='Q'
-        onPress={() => search(searchQuery)}
+        title='  Q  '
+        onPress={() => setSearchQuery(input)}
       />
+      <View style={styles.spacing} />
       <Button
-        title='X'
+        title='  X  '
         onPress={() => {
-          setSearchQuery('');
-          search('')
+          setInput('');
+          setSearchQuery('')
         }}
       />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  view: {
+    display: 'flex',
+    flexDirection: "row",
+    marginVertical: 5,
+    marginHorizontal: 15
+  },
+  input: {
+    flex: 1,
+    padding: 10,
+    fontSize: 20,
+    borderWidth: 2,
+    borderColor: 'grey'
+  },
+  spacing: {
+    minWidth: 10
+  }
+});
 
 export default SearchHeader;

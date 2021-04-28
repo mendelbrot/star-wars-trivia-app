@@ -8,10 +8,11 @@ type Props = {
   items: StarWarsItem[],
   keyAttribute: string,
   getMoreItems: Function,
-  search: Function
+  setSearchQuery: Function,
+  searchQuery: string
 };
 
-function List({ keyAttribute, items, getMoreItems, search }: Props) {
+function List({ keyAttribute, items, getMoreItems, searchQuery, setSearchQuery }: Props) {
 
   function renderItem({ item }: { item: StarWarsItem }) {
     return (
@@ -22,7 +23,11 @@ function List({ keyAttribute, items, getMoreItems, search }: Props) {
   return (
     <FlatList
       data={items}
-      ListHeaderComponent={<SearchHeader search={search} />}
+      ListHeaderComponent={
+        <SearchHeader
+          initialSearchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />}
       renderItem={renderItem}
       keyExtractor={item => item[keyAttribute] as string}
       onEndReached={() => getMoreItems()}
