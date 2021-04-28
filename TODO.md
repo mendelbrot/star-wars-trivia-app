@@ -1,11 +1,9 @@
 ## TODO
 
-- [ ] front end search on the movies list OR use the API's search
 
 ## IN PROGRESS
 
-- [ ] improve nav title functions
-- [ ] pagination with flat list
+- [ ] front end search on the movies list OR use the API's search
 - [ ] minimal styling
 
 ## ON HOLD
@@ -29,3 +27,5 @@
 - [x] render details views of characters, planets, etc...
 - [x] generalize movies list to list of any star wars data
 - [x] links between details views
+- [x] improve nav title functions
+- [x] pagination with flat list

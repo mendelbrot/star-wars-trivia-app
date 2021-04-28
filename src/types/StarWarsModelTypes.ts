@@ -17,7 +17,7 @@ export type DetailsReferenceAttributeType = {
 export type ModelAttributeType = {
   type: StarWarsType,
   pluralLabel: string,
-  listTitleAttribute: string,
+  titleAttribute: string,
   detailsAttributes: DetailsAttributeType[],
   detailsReferenceSingle: DetailsReferenceAttributeType[],
   detailsReferenceList: DetailsReferenceAttributeType[]

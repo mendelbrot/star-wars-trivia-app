@@ -5,7 +5,8 @@ import { StarWarsItem } from 'types/StarWarsTypes';
 
 type Props = {
   items: StarWarsItem[],
-  key: string,
+  keyAttribute: string,
+  getMoreItems: Function
 };
 
 function renderItem({ item }: { item: StarWarsItem }) {
@@ -16,12 +17,13 @@ function renderItem({ item }: { item: StarWarsItem }) {
   )
 }
 
-function List({ items, key }: Props) {
+function List({ keyAttribute, items, getMoreItems }: Props) {
   return (
     <FlatList
       data={items}
       renderItem={renderItem}
-      keyExtractor={item => item[key] as string}
+      keyExtractor={item => item[keyAttribute] as string}
+      onEndReached={() => getMoreItems()}
     />
   );
 };

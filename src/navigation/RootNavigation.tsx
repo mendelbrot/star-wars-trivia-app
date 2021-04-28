@@ -28,16 +28,33 @@ function RootNavigation() {
         <RootStack.Screen
           name="ListScreen"
           component={ListScreen}
+          // set the nav bar title to be the type of star wars item if possible
           options={({ route }) => {
-            const { type } = route.params;
-            const title = StarWarsViewModel[type].pluralLabel;
-            return { title }
+            try {
+              const { type } = route.params;
+              const title = StarWarsViewModel[type].pluralLabel;
+              return { title }
+            } catch (error) {
+              return { title: 'List' }
+            }
+            
           }}
         />
         <RootStack.Screen
           name="DetailsScreen"
           component={DetailsScreen}
-          options={{ title: 'Details' }}
+          // set the nav bar title to be the title attribute of the item if possible
+          options={({ route }) => {
+            try {
+              const { item, item: { type } } = route.params;
+              const titleKey = StarWarsViewModel[type].titleAttribute;
+              const title = item[titleKey] as string;
+              return { title }
+            } catch (error) {
+              return { title: 'Details' }
+            }
+
+          }}
         />
       </RootStack.Navigator>
     </NavigationContainer>

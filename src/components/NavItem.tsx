@@ -11,7 +11,7 @@ type Props = {
 function NavItem({ item }: Props) {
   const navigation = useNavigation();
 
-  const titleAttribute = StarWarsViewModel[item.type]['listTitleAttribute'] as keyof StarWarsItem;
+  const titleAttribute = StarWarsViewModel[item.type]['titleAttribute'] as keyof StarWarsItem;
 
   return (
     <Button

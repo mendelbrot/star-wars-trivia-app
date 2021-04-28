@@ -6,7 +6,7 @@ const StarWarsViewModel: StarWarsViewModelType = {
   Film: {
     type: 'Film',
     pluralLabel: 'Films',
-    listTitleAttribute: 'title' ,
+    titleAttribute: 'title' ,
     detailsAttributes: [
       { key: 'episode_id' , label: 'Episode ID' },
       { key: 'title' , label: 'Title' },
@@ -27,7 +27,7 @@ const StarWarsViewModel: StarWarsViewModelType = {
   Person: {
     type: 'Person',
     pluralLabel: 'People',
-    listTitleAttribute: 'name' ,
+    titleAttribute: 'name' ,
     detailsAttributes: [
       { key: 'name' , label: 'Name' },
       { key: 'height' , label: 'Height' },
@@ -50,7 +50,7 @@ const StarWarsViewModel: StarWarsViewModelType = {
   Planet: {
     type: 'Planet',
     pluralLabel: 'Planets',
-    listTitleAttribute: 'name' ,
+    titleAttribute: 'name' ,
     detailsAttributes: [
       { key: 'name' , label: 'Name' },
       { key: 'rotation_period' , label: 'Rotation Period' },
@@ -71,7 +71,7 @@ const StarWarsViewModel: StarWarsViewModelType = {
   Starship: {
     type: 'Starship',
     pluralLabel: 'Starships',
-    listTitleAttribute: 'name' ,
+    titleAttribute: 'name' ,
     detailsAttributes: [
       { key: 'name' , label: 'Name' },
       { key: 'model' , label: 'Model' },
@@ -95,7 +95,7 @@ const StarWarsViewModel: StarWarsViewModelType = {
   Vehicle: {
     type: 'Vehicle',
     pluralLabel: 'Vehicle',
-    listTitleAttribute: 'name' ,
+    titleAttribute: 'name' ,
     detailsAttributes: [
       { key: 'name' , label: 'Name' },
       { key: 'model' , label: 'Model' },
@@ -118,7 +118,7 @@ const StarWarsViewModel: StarWarsViewModelType = {
   Species: {
     type: 'Species',
     pluralLabel: 'Species',
-    listTitleAttribute: 'name' ,
+    titleAttribute: 'name' ,
     detailsAttributes: [
       { key: 'name' , label: 'Name' },
       { key: 'classification' , label: 'Classification' },

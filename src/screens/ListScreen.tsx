@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from 'navigation/RootNavigation';
-import { getListAsync } from 'services/Swapi';
+import { getListAsync, getListByUrlAsync } from 'services/Swapi';
 import List from 'components/List';
 import Loading from 'components/Loading';
 import Error from 'components/Error';
@@ -34,6 +34,25 @@ class ListScreen extends Component<Props, State> {
   type: StarWarsType;
   title: string;
 
+  async getMoreItems() {
+    try {
+      if (this.state.data) {
+        const { next } = this.state.data;
+        if (next) {
+          const data = await getListByUrlAsync(this.type, next);
+          const moreData = {
+            ...data,
+            results: this.state.data.results.concat(data.results)
+          }
+          this.setState({ data: moreData });
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+      // pass
+    }
+  }
+
   constructor(props: Props) {
     super(props);
 
@@ -44,12 +63,14 @@ class ListScreen extends Component<Props, State> {
 
     this.type = this.props.route.params.type;
     this.title = StarWarsViewModel[this.type].pluralLabel;
+
+    this.getMoreItems = this.getMoreItems.bind(this);
   };
 
   async componentDidMount() {
     try {
       const data = await getListAsync(this.type);
-      this.setState({data});
+      this.setState({ data });
     } catch (error) {
       this.setState({error});
     }
@@ -64,7 +85,7 @@ class ListScreen extends Component<Props, State> {
 
     if (data) {
       const { results } = data;
-      return <List items={results} key='url' />;
+      return <List keyAttribute='url' items={results} getMoreItems={this.getMoreItems} />;
     };
 
     return <Loading />;
