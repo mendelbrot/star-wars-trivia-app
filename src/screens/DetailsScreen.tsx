@@ -4,7 +4,6 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/RootNavigation';
 import { URL, StarWarsItem, StarWarsType } from 'types/StarWarsTypes';
-import { DetailsReferenceAttributeType } from 'types/StarWarsModelTypes';
 import StarWarsViewModel from 'models/StarWarsViewModel';
 import NavFromUrl from 'components/NavFromUrl';
 
@@ -27,6 +26,7 @@ function DetailsScreen({ navigation, route }: Props) {
   const { item } = route.params;
   const {
     detailsAttributes,
+    detailsReferenceSingle,
     detailsReferenceList
   } = StarWarsViewModel[item.type as StarWarsType];
 
@@ -34,11 +34,21 @@ function DetailsScreen({ navigation, route }: Props) {
     <ScrollView>
       {detailsAttributes.map(model => {
         const { key, label } = model;
-        const itemText = item[key as keyof StarWarsItem] as string;
+        const attributeText = item[key as keyof StarWarsItem] as string;
         return (
           <View key={model.key}>
             <Text style={{ fontWeight: 'bold' }}>{label}</Text>
-            <Text>{itemText}</Text>
+            <Text>{attributeText}</Text>
+          </View>
+        );
+      })}
+      {detailsReferenceSingle.map(model => {
+        const { key, label, type } = model;
+        const url = item[key as keyof StarWarsItem] as URL;
+        return (
+          <View key={model.key}>
+            <Text style={{ fontWeight: 'bold' }}>{label}</Text>
+            <NavFromUrl key={url} type={type} url={url} />
           </View>
         );
       })}

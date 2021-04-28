@@ -146,3 +146,13 @@ Update: Tried to create a higher order component for fetching data for a single 
 
 Update: linking between the details screens now works.
 
+## 2021-04-28
+
+The pagination for the flat list is done.  It will fetch data until the screen is full or there is no more data.  Now I'm starting the search feature.
+
+Flat list search tutorial:
+
+https://blog.crowdbotics.com/add-search-bar-flatlist-react-native-apps/
+
+
+

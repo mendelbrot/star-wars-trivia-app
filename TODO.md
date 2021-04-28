@@ -3,7 +3,6 @@
 
 ## IN PROGRESS
 
-- [ ] front end search on the movies list OR use the API's search
 - [ ] minimal styling
 
 ## ON HOLD
@@ -29,3 +28,4 @@
 - [x] links between details views
 - [x] improve nav title functions
 - [x] pagination with flat list
+- [x] front end search on the movies list OR use the API's search

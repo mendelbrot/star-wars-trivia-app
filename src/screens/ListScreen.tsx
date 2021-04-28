@@ -37,21 +37,29 @@ class ListScreen extends Component<Props, State> {
   async getMoreItems() {
     try {
       if (this.state.data) {
-        const { next } = this.state.data;
+        const { next, results } = this.state.data;
         if (next) {
-          const data = await getListByUrlAsync(this.type, next);
-          const moreData = {
-            ...data,
-            results: this.state.data.results.concat(data.results)
-          }
-          this.setState({ data: moreData });
-        }
-      }
+          const nextData = await getListByUrlAsync(this.type, next);
+          const data = {
+            ...nextData,
+            results: results.concat(nextData.results)
+          };
+          this.setState({ data });
+        };
+      };
     } catch (error) {
-      console.log(error.message);
       // pass
-    }
-  }
+    };
+  };
+
+  async search(searchQuery: string) {
+    try {
+      const data = await getListAsync(this.type, searchQuery);
+      this.setState({ data });
+    } catch (error) {
+      this.setState({ error });
+    };
+  };
 
   constructor(props: Props) {
     super(props);
@@ -65,6 +73,7 @@ class ListScreen extends Component<Props, State> {
     this.title = StarWarsViewModel[this.type].pluralLabel;
 
     this.getMoreItems = this.getMoreItems.bind(this);
+    this.search = this.search.bind(this);
   };
 
   async componentDidMount() {
@@ -73,7 +82,7 @@ class ListScreen extends Component<Props, State> {
       this.setState({ data });
     } catch (error) {
       this.setState({error});
-    }
+    };
   };
   
   render() {
@@ -85,7 +94,14 @@ class ListScreen extends Component<Props, State> {
 
     if (data) {
       const { results } = data;
-      return <List keyAttribute='url' items={results} getMoreItems={this.getMoreItems} />;
+      return (
+        <List
+          keyAttribute='url'
+          items={results}
+          getMoreItems={this.getMoreItems}
+          search={this.search}
+        />
+      );
     };
 
     return <Loading />;

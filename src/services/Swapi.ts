@@ -1,7 +1,5 @@
 import axios from 'axios';
-import _ from 'lodash';
 import { URL, StarWarsItem, StarWarsType } from 'types/StarWarsTypes';
-import StarWarsViewModel from 'models/StarWarsViewModel';
 import { GetListReturnType } from 'types/SwapiTypes';
 
 const SWAPI_BASE_URL = 'https://swapi.dev/api/';
@@ -14,11 +12,15 @@ const apiPathsFromTypes = {
   Starship: 'starships/',
   Vehicle: 'vehicles/',
   Species: 'species/',
-}
+};
 
-export async function getListAsync(itemType: StarWarsType): Promise<GetListReturnType> {
+export async function getListAsync(itemType: StarWarsType, searchQuery?: string): Promise<GetListReturnType> {
   const path = apiPathsFromTypes[itemType as keyof typeof apiPathsFromTypes];
   let request = SWAPI_BASE_URL + path;
+  
+  if (searchQuery && (searchQuery.length != 0)) {
+    request += '?search=' + searchQuery;
+  };
 
   const response = await axios.get(request);
   response.data.results.forEach((item: any) => {
