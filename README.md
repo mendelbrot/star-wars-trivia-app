@@ -1,10 +1,12 @@
-This is a Star Wars info application built with React Native. This app displays a list of films and upon selecting a film display details for the film: metadata, characters, vehicles, planets, etc.
+A Star Wars trivia application built with React Native. This app displays a homescreen from which you can navigate to different lists (films, characters, vehicles, starships, planets, and species).  Upon selecting an item in the list, it displays a details screen with information about that item, and links to details about other items associated with it.
 
-Requirements
-* Use Star Wars API ( https://swapi.dev )
-* Films list page that displays list of all films
-* Film detail page that displays film metadata, characters, vehicles, planets, etc.
+Features
+* Uses the Star Wars API ( https://swapi.dev )
+* List pages that displays lists of all films, characters, vehicles, planets, etc.
+* Detail page that displays metadata for films, characters, vehicles, planets, etc.
+* Navigation between details pages.
+* Search filter on list pages to filter displayed items.
 
-Bonus Points
-* Implement one or more detail pages for characters, vehicles, planets, etc. The detail pages should be accessible from the film detail page
-* Implement client side search filter on the films list page to filter displayed films by title, or description
+This is the app's component tree diagram:
+
+![component tree](./component_tree.svg)

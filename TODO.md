@@ -31,3 +31,4 @@
 - [x] pagination with flat list
 - [x] front end search on the movies list OR use the API's search
 - [x] minimal styling
+- [x] create a components tree diagram
